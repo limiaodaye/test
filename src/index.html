@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>DS</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  {% for (var css in o.htmlWebpackPlugin.files.css) { %}
+  <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
+  {% } %}
+  <link rel="stylesheet" type="text/css" href="../static/freestyle.css">
+  <script src="/static/jquery.min.js"></script>
+  <script src="../static/jquery-ui-1.10.3.custom.js"></script>
+  <script src="../static/echart.js"></script>
+</head>
+<body>
+
+  <div id="app"></div>
+  
+   <!-- <div>
+   <link rel="stylesheet" type="text/css" href="http://192.168.22.123:8080/ static/upload/css/cqy_polymerization$c02afe34-295e-4d0c-a35d-1cda94031e5e.css">
+   </div> -->
+<script type="text/javascript" src="/static/jsplumb.min.js"></script>
+{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
+<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
+{% } %}
+<script type="text/javascript">
+  (function (doc, win) {
+    var $body = document.querySelector('body');
+    var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                //以宽750px为例子，并扩大100倍，尽可能的保证精度
+                docEl.style.fontSize = 100 * (clientWidth / 1366) + 'px';
+                //缩放之后再显示页面，防止缩放过程被观察到，影响体验
+                $body.style.visibility = 'visible';
+            };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</body>
+</html>

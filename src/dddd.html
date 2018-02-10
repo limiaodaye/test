@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="../static/jquery.min.js"></script>
+</head>
+<body>
+	<div>
+		<input type="button" value="数据类型新增/修改" id="saveBaseSetType">
+		<input type="button" value="数据类型批量删除" id="deleteBaseSetType">
+		<input type="button" value="新增模型" id="saveBaseSetInfo">
+		<input type="button" value="模型与数据类型列表" id="queryAllBaseSet">
+		<input type="button" value="获取数据源表" id="queryDataSourceTableInfo">
+		<input type="button" value="获取数据模型" id="queryBaseSetModel">
+		<input type="button" value="保存数据模型" id="saveBaseSetModel">
+		<input type="button" value="拖拉表" id="queryColByDropTable">
+		<input type="button" value="生成数据" id="queryDataBydropTabel">
+		<input type="button" value="删除数据模型" id="deleteBaseSetModel">
+		<input type="button" value="查询表数据" id="getDataSourceTableInfoById">
+		<input type="button" value="查询主题" id="queryAllTheme">
+		<input type="button" value="查询主题通过id" id="queryThemeById">	
+	</div>
+
+</body>
+<script type="text/javascript">
+
+
+				$("#queryThemeById").click(function(){
+
+		var param={};
+		param.themeid=1;
+		
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/theme/queryThemeById.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+	
+
+			$("#queryAllTheme").click(function(){
+
+		var param={};
+		
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/theme/queryAllTheme.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+		
+
+
+			$("#getDataSourceTableInfoById").click(function(){
+
+		var param={};
+			param.dataSourceid="1";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSource/getDataSourceTableInfoById.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+			
+
+
+
+		$("#deleteBaseSetModel").click(function(){
+			var param={};
+				param.dsid="6";
+				$.ajax({
+			    type:'POST',
+			    url:'http://localhost:8080/dataSet/deleteBaseSetModel.do',
+			    dataType:"json",
+			     data:param,
+		        success:function(data){console.log(data);
+		        	console.log(data);
+		        	alert(data.messages);
+		        } 
+		   	})
+		})
+
+
+		$("#queryDataBydropTabel").click(function(){
+		var orderby=[{},{}];
+			orderby[0].columnes="auer.score";
+			orderby[0].orderType="0";
+			orderby[1].columnes="ateacher.name";
+			orderby[1].orderType="1";
+
+		var columTable=[{}];
+			columTable[0].tableSource="auer"
+			//columTable[0].tableTarget="ateacher"
+			//columTable[0].togetColume="auer.teacher=ateacher.id"
+			columTable[0].toget="4" //0是默认，1：左连接，2:右连接：3全连接
+		
+		var param={};
+			param.columns="auer_aaa_ss.name,auer_aaa_ss.score";
+			param.columTable=JSON.stringify(columTable);
+			param.newColumn=JSON.stringify({"fun":"concat(auer.name,auer.score)","isGroup":"0"});
+			param.dataSourceid="68";
+			param.orderBy=JSON.stringify([{}]);
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/queryDataBydropTabel.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+
+
+
+
+		$("#queryColByDropTable").click(function(){
+
+		var param={};
+			param.dataSourceid="1";
+			param.columTable="user";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/queryColByDropTable.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+
+	
+		$("#saveBaseSetModel").click(function(){
+
+		var dsMetadata=[{
+			"dsMetadataid":"30",
+			"columnFeilds":"ddd",
+			"columnComments":"sdfafdbbbxxx"
+		},{
+			"dsMetadataid":"31",
+			"columnFeilds":"kkk",
+			"columnComments":"sdfsaaaaaxxx"
+		}];
+	
+
+		var param={};
+			param.modelJson="1sdddddxxx";
+			param.dsMetadatas=JSON.stringify(dsMetadata);
+			param.dsid="1";
+			param.modelSql="sssssxxx";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/saveBaseSetModel.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+
+
+
+		$("#queryBaseSetModel").click(function(){
+		var param={};
+			param.dsid="1";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/queryBaseSetModel.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+
+
+	
+	$("#queryDataSourceTableInfo").click(function(){
+		var param={};
+			param.dataSourceid="68";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/queryDataSourceTableInfo.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+
+
+
+	$("#queryAllBaseSet").click(function(){
+		var param={};
+			param.pageSize="10";
+			param.pageNo="1";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/queryAllBaseSet.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+
+
+	$("#saveBaseSetType").click(function(){
+		var param={};
+			param.typeName="kkkk";
+			param.typeDescribe="我去啊a"
+			param.dataSetTypeid="3";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/saveBaseSetType.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+
+	$("#deleteBaseSetType").click(function(){
+		var param={};
+			param.ids="1,3";
+			$.ajax({
+		    type:'POST',
+		    url:'http://localhost:8080/dataSet/deleteBaseSetType.do',
+		    dataType:"json",
+		     data:param,
+	        success:function(data){console.log(data);
+	        	alert(data.messages);
+	        } 
+	   })
+	})
+	  
+
+</script>
+</html>

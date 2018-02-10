@@ -1,0 +1,1173 @@
+/**
+ * @author: huangteng
+ * @description: create a mock server with faker
+ * @time: 2017-6-30
+ * @modifiedTime:
+ * @modifiedBy:
+ */
+
+import Mock from 'mockjs'
+
+
+// only use in development env
+if(__DEV__){
+	const Random = Mock.Random
+	Random.word();
+	Random.csentence();
+	Random.date();
+
+	// 新增数据集
+	Mock.mock('/a/base/addNewDataSet','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return Mock.mock({
+				elementthing:{
+					"ds_id|1-10000":10000,
+					"ds_name":param.ds_name,
+					"ds_describe":param.ds_describe
+				},
+				success:true,
+				messages:'新增数据集成功'
+			})
+		}else{
+			return{
+				elementthing:{},
+				success:false,
+				messages:'新增数据集失败'
+			}
+		}
+	})
+
+	// 数据集名称列表查询
+	Mock.mock('/a/base/getDataSetNameList','get',function(options){
+		return Mock.mock({
+			elementthing:
+			[
+				Mock.mock({
+					"ds_name":'@word()',
+					"ds_id|1-10000":10000
+				}),
+				Mock.mock({
+					"ds_name":'@word()',
+					"ds_id|1-10000":10000
+				}),
+				Mock.mock({
+					"ds_name":'@word()',
+					"ds_id|1-10000":10000
+				}),
+				Mock.mock({
+					"ds_name":'@word()',
+					"ds_id|1-10000":10000
+				}),
+				Mock.mock({
+					"ds_name":'@word()',
+					"ds_id|1-10000":10000
+				}),
+				{
+					"ds_name":'测试',
+					"ds_id":10000
+				}
+			],
+			success:true,
+			messages:'获取数据集列表成功'
+		})
+	})
+
+	// 数据集列表详情查询
+	Mock.mock('/a/base/getAllDetailDataSetInfo','get',function(options){
+		return Mock.mock({
+			"elementthing":[
+				Mock.mock({
+					"ds_id|1-10000":10000,
+					"ds_name":'@word()',
+					"ds_data_provenance":["@word(3, 5)","@word(3, 5)","@word(3, 5)"],
+					"ds_data_content":["@csentence(3, 5)","@csentence(3, 5)","@csentence(3, 5)","@word(3, 6)","@word(3, 6)"],
+					"ds_amount|10000-1000000":1000000,
+					"ds_describe":'@word(15)',
+					"GMT_MODIFIED":'@date("yyyy-MM-dd")',
+					"is_timing|0-1":1,
+					"timing_time|0-100":100,
+					"time_unit|0-4":4
+				}),
+				Mock.mock({
+					"ds_id|1-10000":10000,
+					"ds_name":'@word()',
+					"ds_data_provenance":["@word(3, 5)","@word(3, 5)","@word(3, 5)"],
+					"ds_data_content":["@csentence(3, 5)","@csentence(3, 5)","@csentence(3, 5)","@word(3, 6)","@word(3, 6)"],
+					"ds_amount|10000-1000000":1000000,
+					"ds_describe":'@word(15)',
+					"GMT_MODIFIED":'@date("yyyy-MM-dd")',
+					"is_timing|0-1":1,
+					"timing_time|0-100":100,
+					"time_unit|0-4":4
+				}),
+				Mock.mock({
+					"ds_id|1-10000":10000,
+					"ds_name":'@word()',
+					"ds_data_provenance":["@word(3, 5)","@word(3, 5)","@word(3, 5)"],
+					"ds_data_content":["@csentence(3, 5)","@csentence(3, 5)","@csentence(3, 5)","@word(3, 6)","@word(3, 6)"],
+					"ds_amount|10000-1000000":1000000,
+					"ds_describe":'@word(15)',
+					"GMT_MODIFIED":'@date("yyyy-MM-dd")',
+					"is_timing|0-1":1,
+					"timing_time|0-100":100,
+					"time_unit|0-4":4
+				}),
+				Mock.mock({
+					"ds_id|1-10000":10000,
+					"ds_name":'@word()',
+					"ds_data_provenance":["@word(3, 5)","@word(3, 5)","@word(3, 5)"],
+					"ds_data_content":["@csentence(3, 5)","@csentence(3, 5)","@csentence(3, 5)","@word(3, 6)","@word(3, 6)"],
+					"ds_amount|10000-1000000":1000000,
+					"ds_describe":'@word(15)',
+					"GMT_MODIFIED":'@date("yyyy-MM-dd")',
+					"is_timing|0-1":1,
+					"timing_time|0-100":100,
+					"time_unit|0-4":4
+				}),
+				Mock.mock({
+					"ds_id|1-10000":10000,
+					"ds_name":'@word()',
+					"ds_data_provenance":["@word(3, 5)","@word(3, 5)","@word(3, 5)"],
+					"ds_data_content":["@csentence(3, 5)","@csentence(3, 5)","@csentence(3, 5)","@word(3, 6)","@word(3, 6)"],
+					"ds_amount|10000-1000000":1000000,
+					"ds_describe":'@word(15)',
+					"GMT_MODIFIED":'@date("yyyy-MM-dd")',
+					"is_timing|0-1":1,
+					"timing_time|0-100":100,
+					"time_unit|0-4":4
+				}),
+				Mock.mock({
+					"ds_id":10000,
+					"ds_name":'@word()',
+					"ds_data_provenance":["@word(3, 5)","@word(3, 5)","@word(3, 5)"],
+					"ds_data_content":["@csentence(3, 5)","@csentence(3, 5)","@csentence(3, 5)","@word(3, 6)","@word(3, 6)"],
+					"ds_amount|10000-1000000":1000000,
+					"ds_describe":'@word(15)',
+					"GMT_MODIFIED":'@date("yyyy-MM-dd")',
+					"is_timing|0-1":1,
+					"timing_time|0-100":100,
+					"time_unit|0-4":4
+				}),
+				Mock.mock({
+					"ds_id":9999,
+					"ds_name":'@word()',
+					"ds_data_provenance":["@word(3, 5)","@word(3, 5)","@word(3, 5)"],
+					"ds_data_content":["@csentence(3, 5)","@csentence(3, 5)","@csentence(3, 5)","@word(3, 6)","@word(3, 6)"],
+					"ds_amount|10000-1000000":1000000,
+					"ds_describe":'@word(15)',
+					"GMT_MODIFIED":'@date("yyyy-MM-dd")',
+					"is_timing|0-1":1,
+					"timing_time|0-100":100,
+					"time_unit|0-4":4
+				})
+			],
+			success:true,
+			messages:'获取数据成功'
+		})
+	})
+
+	// 数据集删除
+	Mock.mock('/a/base/deleteDataSetById','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.ds_id !== "" && param.ds_id !== null){
+			return{
+				elementthing:{},
+				success:true,
+				messages:'删除成功'
+			}
+		}else{
+			return{
+				elementthing:{},
+				success:false,
+				messages:'删除失败'
+			}
+		}
+	})
+
+	// 定时设置
+	Mock.mock('/a/base/setTimeForDataSet','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return{
+				elementthing:{},
+				success:true,
+				messages:'操作成功'
+			}
+		}else{
+			return{
+				elementthing:{},
+				success:false,
+				messages:'操作失败'
+			}
+		}
+	})
+
+	// 点击数据集列表的某一数据集进入该数据集的配置页面
+	Mock.mock('/a/base/enterDataSetById','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.ds_id !== '' && param.ds_id !== null){
+			return Mock.mock({
+				elementthing:{
+					'dataflow_id|1-1000':1000,
+					dataflow_nodes:
+					[
+						Mock.mock({
+							"node_id":1,
+							"node_name":'oracle数据源1',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":1,
+								"node_name":'oracle数据源1',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':128,
+									'top':50
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":2,
+							"node_name":'oracle数据源2',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":2,
+								"node_name":'oracle数据源2',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':200,
+									'top':50
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":3,
+							"node_name":'数据清洗',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":3,
+								"node_name":'数据清洗',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':128,
+									'top':125
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":4,
+							"node_name":'数据合并',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":4,
+								"node_name":'数据合并',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':170,
+									'top':200
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":5,
+							"node_name":'输出到文件',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":5,
+								"node_name":'输出到文件',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':170,
+									'top':250
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						})
+					],
+					dataflow_relations:[
+						Mock.mock({
+							sourcenodeid:1,
+							targetnodeid:3
+						}),
+						Mock.mock({
+							sourcenodeid:3,
+							targetnodeid:4
+						}),
+						Mock.mock({
+							sourcenodeid:2,
+							targetnodeid:4
+						}),
+						Mock.mock({
+							sourcenodeid:4,
+							targetnodeid:5
+						}),
+					]
+				},
+				success:true,
+				messages:'获取数据成功'
+			})
+		}else{
+			return{
+				elementthing:{},
+				success:false,
+				messages:'获取数据失败'
+			}
+		}
+	})
+
+	// 启动任务
+	Mock.mock('/a/base/startTheTask','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.dataflow_id !=='' && param.dataflow_id != null){
+			return {
+				elementthing:{},
+				success:true,
+				messages:'启动成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'启动失败'
+			}
+		}
+	})
+	// 暂停任务
+	Mock.mock('/a/base/stopTheTask','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.dataflow_id !=='' && param.dataflow_id != null){
+			return {
+				elementthing:{},
+				success:true,
+				messages:'暂停任务成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'暂停任务失败'
+			}
+		}
+	})
+
+	// 获取历史任务列表
+	Mock.mock('/a/base/getHistoryTaskList','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.ds_id !== '' && param.ds_id != null){
+			return {
+				elementthing:Mock.mock({
+					ds_name:'@word(5)',
+					dataflow_id:1000,
+					data:
+					[
+						Mock.mock({
+							dataflow_id:1000,
+							'task_log_id|0-1000':1000,
+							'task_status|0-4':4,
+							'task_success_count|1000-10000':10000,
+							'task_fail_count|0-100':100
+
+						}),
+						Mock.mock({
+							dataflow_id:1000,
+							'task_log_id|0-1000':1000,
+							'task_status|0-4':4,
+							'task_success_count|1000-10000':10000,
+							'task_fail_count|0-100':100
+
+						}),
+						Mock.mock({
+							dataflow_id:1000,
+							'task_log_id|0-1000':1000,
+							'task_status|0-4':4,
+							'task_success_count|1000-10000':10000,
+							'task_fail_count|0-100':100
+
+						})
+					]
+				}),
+				success:true,
+				messages:'获取数据成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'获取数据失败'
+			}
+		}
+	})
+
+	// 历史任务详情
+	Mock.mock('/a/base/getNodeHistoryTask','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.task_log_id !== '' && param.task_log_id !=null){
+			return Mock.mock({
+				elementthing:{
+					'dataflow_id|1-1000':1000,
+					dataflow_nodes:
+					[
+						Mock.mock({
+							"node_id":1,
+							"node_name":'oracle数据源1',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":1,
+								"node_name":'oracle数据源1',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':128,
+									'top':50
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":2,
+							"node_name":'oracle数据源2',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":2,
+								"node_name":'oracle数据源2',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':200,
+									'top':50
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":3,
+							"node_name":'数据清洗',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":3,
+								"node_name":'数据清洗',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':128,
+									'top':125
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":4,
+							"node_name":'数据合并',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":4,
+								"node_name":'数据合并',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':170,
+									'top':200
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						}),
+						Mock.mock({
+							"node_id":5,
+							"node_name":'输出到文件',
+							"node_status|0-4":4,
+							dataflow_node_details:Mock.mock({
+								"node_id":5,
+								"node_name":'输出到文件',
+								"node_status|0-4":4,
+								"position":Mock.mock({
+									'left':170,
+									'top':250
+								}),
+								"component_id|0-10000":10000,
+								"component_name":'@word(4)',
+								nodeparam:{
+									
+								}
+							})
+						})
+					],
+					dataflow_relations:[
+						Mock.mock({
+							sourcenodeid:1,
+							targetnodeid:3
+						}),
+						Mock.mock({
+							sourcenodeid:3,
+							targetnodeid:4
+						}),
+						Mock.mock({
+							sourcenodeid:2,
+							targetnodeid:4
+						}),
+						Mock.mock({
+							sourcenodeid:4,
+							targetnodeid:5
+						}),
+					]
+				},
+				success:true,
+				messages:'获取数据成功'
+			})
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'获取数据失败'
+			}
+		}
+	})
+
+	//击历史任务中某一节点触发获取相关信息的事件
+	Mock.mock('/a/base/getNodeHistoryTaskInfo','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return Mock.mock({
+				elementthing:Mock.mock({
+					execute_by:'系统',
+					task_log_time:'@date("yyyy-MM-dd")',
+					task_id:123,
+					is_successful:0,
+					node_data_num:10000,
+					node_task_column:[
+						"身份号码","车辆信息"
+					]
+				}),
+				success:true,
+				messages:'获取数据成功'
+			})
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'获取数据失败'
+			}
+		}
+	})
+
+	// 取左侧导航table的组件列表
+	Mock.mock('/a/base/getAllComponent','get',function(options){
+		return Mock.mock({
+			elementthing:
+			[
+				{
+					component_type_name:'数据源',
+					data:
+					[
+						{
+							"component_id|0-10000":10000,
+							component_name:'mysql',
+							component_description:'mysql',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'oracle',
+							component_description:'oracle',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'excel',
+							component_description:'excel',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'sqlserver',
+							component_description:'sqlserver',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						}
+
+					]
+				},
+				{
+					component_type_name:'输出',
+					data:
+					[
+						{
+							"component_id|0-10000":10000,
+							component_name:'mysql',
+							component_description:'mysql',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'oracle',
+							component_description:'oracle',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'excel',
+							component_description:'excel',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'sqlserver',
+							component_description:'sqlserver',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						}
+
+					]
+				},
+				{
+					component_type_name:'数据处理',
+					data:
+					[
+						{
+							"component_id|0-10000":10000,
+							component_name:'数据合并',
+							component_description:'数据合并',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'数据清洗',
+							component_description:'数据合并',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'数据转换',
+							component_description:'数据转换',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						},
+						{
+							"component_id|0-10000":10000,
+							component_name:'数据聚合',
+							component_description:'数据聚合',
+							component_imgurl:'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=mysql&step_word=&hs=0&pn=1&spn=0&di=193732696850&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=478316268%2C4251234910&os=3141204532%2C3320172919&simid=4198463661%2C692251618&adpicid=0&lpn=0&ln=1917&fr=&fmq=1498793189401_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fimages.liqucn.com%2Fh018%2Fh88%2Fimg201411221428360219_info300X300.png&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bstq7vg_z%26e3Bv54AzdH3F63AzdH3F9daac0_z%26e3Bfip4s&gsm=0&rpstart=0&rpnum=0'
+						}
+
+					]
+				}
+			],
+			success:true,
+			messages:'获取列表成功'
+		})
+	})
+
+	// 新增节点
+	Mock.mock('/a/base/addNewNodeAndGetPropFiles','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.dataflow_node_details){
+			return Mock.mock({
+				elementthing:Mock.mock({
+					component_name:"sss",
+					component_js_file:"xxx.js",
+					component_css_file:'xxx.css',
+					component_html_modelcode:'<div></div>',
+					node_id:123
+				}),
+				success:true,
+				messages:'添加节点成功'
+			})
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'添加节点失败'
+			}
+		}
+	})
+
+	// 节点删除
+	Mock.mock('/a/base/deleteNodeById','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+
+		if(param.node_id !== ''&& param.node_id !=null){
+			return Mock.mock({
+				elementthing:{},
+				success:true,
+				messages:'删除成功'
+			})
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'删除失败'
+			}
+		}
+	})
+
+	// 节点配置保存
+	Mock.mock('/a/base/saveNodePropSet','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return Mock.mock({
+				elementthing:{
+
+				},
+				success:true,
+				messages:'保存成功'
+			})
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'保存失败'
+			}
+		}
+	})
+	//点击节点的时候获取节点配置json字符串
+	Mock.mock('/a/base/getNodePropSetJson','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.node_id !== '' && param.node_id != null){
+			return Mock.mock({
+				elementthing:Mock.mock({
+					'node_id|1-10000':10000,
+					node_name:"@word(5)",
+					'node_status|0-4':4,
+					dataflow_node_details:Mock.mock({
+						'node_id|1-10000':10000,
+						node_name:"@word(5)",
+						'node_status|0-4':4,
+						position:Mock.mock({
+							'left|0-500':500,
+							"top|0-800":800
+						}),
+						'component_id|1-10000':10000,
+						component_name:"@word(5)",
+						nodeparam:{}
+					}),
+					component_js_file:"xxx.js",
+					component_css_file:"xxxx.css",
+					component_html_code:"<div></div>"
+				}),
+				success:true,
+				messages:'获取数据成功'
+			})
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'获取数据失败'
+			}
+		}
+	})
+
+	//拖动组件改变位置的时候触发保存新的位置信息
+	Mock.mock('/a/base/dropNode','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return {
+				elementthing:{},
+				success:true,
+				messages:"操作成功"
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:"操作失败"
+			}
+		}
+	})
+
+	// 根据流程任务id返回所有的节点关系数组
+	Mock.mock('/a/base/getAllNodeRelationShips','get',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.dataflow_id !== '' && param.dataflow_id != null){
+			return {
+				elementthing:Mock.mock({
+					dataflow_relations:[
+						Mock.mock({
+							sourcenodeid:1,
+							targetnodeid:3
+						}),
+						Mock.mock({
+							sourcenodeid:3,
+							targetnodeid:4
+						}),
+						Mock.mock({
+							sourcenodeid:2,
+							targetnodeid:4
+						}),
+						Mock.mock({
+							sourcenodeid:4,
+							targetnodeid:5
+						}),
+					]
+				}),
+				success:true,
+				messages:"获取数据成功"
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:"获取数据失败"
+			}
+		}
+	})
+
+	// 连线触发，保存节点关系
+	Mock.mock('/a/base/saveNodeRelationShip','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.dataflow_id !== '' && param.dataflow_id != null){
+			return {
+				elementthing:{},
+				success:true,
+				messages:"保存成功"
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:"保存失败"
+			}
+		}
+	})
+
+	//获取组件管理界面列表
+	Mock.mock('/a/base/getComponentList','get',function(options){
+		return Mock.mock({
+			elementthing:
+			[
+				{
+					component_type_name:"数据源",
+					component_type_id:1,
+					component_type_description:"数据源",
+					gmt_modified:"2017-6-30",
+					data:
+					[
+						{
+							component_id:13,
+							component_name:'mysql',
+							component_description:'mysql',
+							is_delete:0,
+							gmt_modified:"2017-6-30"
+						}
+					]
+				},
+				{
+					component_type_name:"数据源",
+					component_type_id:1,
+					component_type_description:"数据源",
+					gmt_modified:"2017-6-30",
+					data:
+					[
+						{
+							component_id:1234,
+							component_name:'oracle',
+							component_description:'oracle',
+							is_delete:0,
+							gmt_modified:"2017-6-30"
+						}
+					]
+				},
+				{
+					component_type_name:"数据处理",
+					component_type_id:2,
+					component_type_description:"数据处理",
+					gmt_modified:"2017-6-30",
+					data:
+					[
+						{
+							component_id:16,
+							component_name:'数据合并',
+							component_description:'数据合并',
+							is_delete:0,
+							gmt_modified:"2017-6-30"
+						}
+					]
+				},
+				{
+					component_type_name:"数据处理",
+					component_type_id:2,
+					component_type_description:"数据处理",
+					gmt_modified:"2017-6-30",
+					data:
+					[
+						{
+							component_id:11236,
+							component_name:'数据聚合',
+							component_description:'数据聚合',
+							is_delete:0,
+							gmt_modified:"2017-6-30"
+						}
+					]
+				}
+
+			],
+			success:true,
+			messages:'获取数据成功'
+		})
+	})
+
+	//根据组件名字模糊查询
+	Mock.mock('/a/base/getComponentInfoByName','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.component_name !== '' && param.component_name!=null){
+			return{
+				elementthing:{
+					component_type_name:"数据源",
+					component_type_id:1,
+					component_type_description:"数据源",
+					gmt_modified:"2017-6-30",
+					data:
+					[
+						{
+							component_id:13,
+							component_name:'mysql',
+							component_description:'mysql',
+							is_delete:0,
+							gmt_modified:"2017-6-30"
+						}
+					]
+				},
+				success:true,
+				messages:'获取数据成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'失败了'
+			}
+		}
+	})
+
+	//新增组件类型
+	Mock.mock('/a/base/addNewComponentType','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return {
+				elementthing:{
+					component_type_id:5512,
+					gmt_modified:"2017-6-30"
+				},
+				success:true,
+				messages:'新增类型成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'新增类型失败'
+			}
+		}
+	})
+
+	//新增组件
+	Mock.mock('/a/base/addNewComponent','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return {
+				elementthing:{
+					component_id:56,
+					is_delete:1,
+					gmt_modified:"2017-6-30"
+				},
+				success:true,
+				messages:'新增成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'新增失败'
+			}
+		}
+	})
+
+	//组件配置文件删除
+	Mock.mock('/a/base/deleteFileForComponentById','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return {
+				elementthing:{
+				},
+				success:true,
+				messages:'删除成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'删除失败'
+			}
+		}
+	})
+
+	//组件删除
+	Mock.mock('/a/base/deleteComponentById','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.component_id!=='' && param.component_id!=null){
+			return {
+				elementthing:{
+				},
+				success:true,
+				messages:'删除成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'删除失败'
+			}
+		}
+	})
+
+	// 组件编辑
+	Mock.mock('/a/base/editComponent','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param){
+			return {
+				elementthing:{
+				},
+				success:true,
+				messages:'编辑成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'编辑失败'
+			}
+		}
+	})
+
+	// 获取数据源列表
+	Mock.mock('/a/base/getDataSourceList','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.DS_STYLE!==''&&param.DS_STYLE!=null){
+			return {
+				elementthing:[
+					Mock.mock({
+						DB_STYLE:'mysql',
+						DB_TEMPLATES:123
+					}),
+					Mock.mock({
+						DB_STYLE:'oracle',
+						DB_TEMPLATES:1235
+					})
+				],
+				success:true,
+				messages:'操作成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'操作失败'
+			}
+		}
+	})
+
+	// 获取某一数据库数据源对应的json和字段
+	Mock.mock('/a/base/getDataSourceList','post',function(options){
+		// get params
+		let param = JSON.parse(options.body)
+		if(param.DB_TEMPLATES!==''&&param.DB_TEMPLATES!=null){
+			return {
+				elementthing:[
+					template_json:{
+						jdbc_type: "mysql",
+						versions:"mysql5.0",
+						jdbc_url:"",
+						jdbc_driver: "com.mysql.jdbc.Driver",
+						ip: "192.168.22.121",
+						port: "3306",
+						username: "123",
+						password: "123",
+						database: "tt",
+						testsql:""
+					},
+					columns:
+					[
+						{
+			                id: 123,
+			                columnname: "jaa001",
+			                columncomment: "身份号码",
+			                as: "jaa001",
+			                selected: ""
+			            },
+			            {
+			                id: "",
+			                columnname: "jaa002",
+			                columncomment: "姓名",
+			                as: "jaa002",
+			                selected: ""
+			            }
+					]
+				],
+				success:true,
+				messages:'操作成功'
+			}
+		}else{
+			return {
+				elementthing:{},
+				success:false,
+				messages:'操作失败'
+			}
+		}
+	})
+}
+
+export default Mock
